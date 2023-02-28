@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
 
-function App() {
+const App = () => {
+  let [post,setPost]=useState([]);
+
+  useEffect(()=>{
+    let fetchPosts=async()=>{
+      let res= await fetch(`https://dummyjson.com/posts`);
+      let data=await res.json();
+      console.log(data);
+      let {posts}=data;
+      setPost(posts);
+    }
+    fetchPosts();
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>{post.map(value=>{
+      return(
+        <h1 key={value.id}>{value.id}. {value.title}</h1>
+      )
+    })}</>
+  )
+    
 }
 
-export default App;
+export default App
