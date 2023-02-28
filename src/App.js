@@ -16,7 +16,7 @@ const App = () => {
   return (
     <>{post.map(value=>{
       return(
-        <h1 key={value.id}>{value.id}. {value.title}</h1>
+        <h2 key={value.id}>{value.id}. {value.title}</h2>
       )
     })}</>
   )
